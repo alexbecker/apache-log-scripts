@@ -7,7 +7,7 @@
 	# unlike the referer, the user-agent may have spaces
 	# keep grabbing words until we reach end of user-agent
 	ind = 13;
-	while (ind < NR && substr(user_agent, length(user_agent)) != "\"") {
+	while (substr(user_agent, length(user_agent)) != "\"") {
 		user_agent = user_agent " " $ind;
 		ind++;
 	}
