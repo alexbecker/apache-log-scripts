@@ -2,7 +2,16 @@
 # list the user-agents in an apache log (with default logging) and how many times each appears
 
 {
-	count[$12]++;
+	user_agent = $12;
+
+	# unlike the referer, the user-agent may have spaces
+	# keep grabbing words until we reach end of user-agent
+	ind = 13;
+	while (ind < NR && substr(user_agent, length(user_agent)) != "\"") {
+		user_agent = user_agent " " $ind;
+		ind++;
+	}
+	count[user_agent]++;
 }
 
 END {
